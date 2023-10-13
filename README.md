@@ -8,3 +8,23 @@ go语言开发的satori协议的sdk客户端
 
 [![](https://img.shields.io/github/commit-activity/m/dezhishen/satori-sdk-go?logo=github&style=for-the-badge)](https://github.com/dezhishen/satori-sdk-go/graphs/commit-activity)
 [![](https://img.shields.io/github/last-commit/dezhishen/satori-sdk-go.svg?style=for-the-badge&logo=github)](https://github.com/dezhishen/satori-sdk-go/commits)
+## todo
+
+- [ ] 模型
+  - [ ] ...
+- [ ] 客户端创建
+  - [ ] http
+  - [ ] websocket
+  - [ ] webhook
+- [ ] API
+  - [ ] ..
+- [ ] EVENT 
+
+## 目录
+```
+- pkg # sdk暴露给外部的能力
+- - api
+- - client
+- - event
+- - model
+```
