@@ -18,7 +18,7 @@ go语言开发的satori协议的sdk客户端
   - [ ] webhook
 - [ ] API
   - [ ] ..
-- [ ] EVENT 
+- [ ] EVENT
 
 ## 目录
 ```
