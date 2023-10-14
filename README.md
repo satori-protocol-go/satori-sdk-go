@@ -27,30 +27,32 @@ go语言开发的satori协议的sdk客户端
   - [ ] GuildMember
     - [ ] API
     - [ ] Event
-    - [ ] Model
+    - [x] Model
   - [ ] GuildRole
     - [ ] API
     - [ ] Event
-    - [ ] Model
+    - [x] Model
   - [ ] Login
     - [ ] API
     - [ ] Event
-    - [ ] Model
+    - [x] Model
   - [ ] Message
     - [ ] API
     - [ ] Event
-    - [ ] Model
+    - [x] Model
+    - [ ] [元素](https://satori.js.org/zh-CN/protocol/elements.html)构建器和解析器
   - [ ] Reaction
     - [ ] API
     - [ ] Event
-    - [ ] Model
+    - [x] Model
   - [ ] User
     - [ ] API
     - [ ] Event
-    - [ ] Model
+    - [x] Model
 - [ ] API
 - [ ] EVENT
-
+## 示例
+[examples/main.go](./examples/main.go)
 ## 目录
 ```
 - examples # 使用示例
