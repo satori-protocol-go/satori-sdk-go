@@ -7,21 +7,18 @@ import (
 	"github.com/spf13/viper"
 )
 
-const configPath = "./configs"
+const defaultConfigPath = "./configs"
 
-// var all_config OnebotConfig
-
-// func init() {
-// 	loadConfig(configName)
-// }
-
-func LoadConfig(name string) (*SatoriConfig, error) {
+func LoadConfig(configPath, name string) (*SatoriConfig, error) {
+	if configPath == "" {
+		configPath = defaultConfigPath
+	}
 	exists := pathExists(configPath)
 	if !exists {
 		return nil, fmt.Errorf("config path not exists: %v", configPath)
 	}
 	c := viper.New()
-	c.AddConfigPath("./configs")
+	c.AddConfigPath(configPath)
 	c.SetConfigName(name)
 	c.SetConfigType("yaml")
 	err := c.ReadInConfig()
