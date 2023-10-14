@@ -10,6 +10,7 @@ import (
 	"github.com/dezhishen/satori-sdk-go/pkg/resource/login"
 	"github.com/dezhishen/satori-sdk-go/pkg/resource/message"
 	"github.com/dezhishen/satori-sdk-go/pkg/resource/reaction"
+	"github.com/dezhishen/satori-sdk-go/pkg/resource/user"
 )
 
 type SatoriApi interface {
@@ -20,6 +21,7 @@ type SatoriApi interface {
 	login.SatoriLoginApi
 	message.SatoriMessageApi
 	reaction.SatoriReactionApi
+	user.SatoriUserApi
 }
 
 type SatoriApiImpl struct {
@@ -30,6 +32,7 @@ type SatoriApiImpl struct {
 	login.SatoriLoginApi
 	message.SatoriMessageApi
 	reaction.SatoriReactionApi
+	user.SatoriUserApi
 }
 
 func NewSatorApiByConfig(conf config.SatoriConfig) (SatoriApi, error) {
@@ -69,7 +72,10 @@ func NewSatorApiByConfig(conf config.SatoriConfig) (SatoriApi, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	userApi, err := user.NewSatoriUserApi(client)
+	if err != nil {
+		return nil, err
+	}
 	return &SatoriApiImpl{
 		channelApi,
 		guildApi,
@@ -78,5 +84,6 @@ func NewSatorApiByConfig(conf config.SatoriConfig) (SatoriApi, error) {
 		loginApi,
 		messageApi,
 		reactionApi,
+		userApi,
 	}, nil
 }

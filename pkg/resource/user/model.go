@@ -1,6 +1,10 @@
 package user
 
 type User struct {
+	Id     string `json:"id"`
+	Name   string `json:"name,omitempty"`
+	Avatar string `json:"avatar,omitempty"`
+	IsBot  bool   `json:"is_bot,omitempty"`
 }
 
 type UserList struct {
