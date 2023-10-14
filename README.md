@@ -1,5 +1,5 @@
 # satori-sdk-go
-go语言开发的satori协议的sdk客户端
+go语言开发的[satori](https://satori.js.org/zh-CN/)协议的sdk客户端
 
 [![](https://img.shields.io/github/license/dezhishen/satori-sdk-go.svg?style=for-the-badge&logo=github)](./LICENSE)
 [![](https://img.shields.io/github/stars/dezhishen/satori-sdk-go.svg?style=for-the-badge&logo=github)](https://github.com/dezhishen/satori-sdk-go/stargazers)
@@ -14,7 +14,7 @@ go语言开发的satori协议的sdk客户端
 - [ ] 客户端创建
   - [x] http
   - [x] websocket
-  - [x] Webhook
+  - [x] webhook
 - [ ] 资源
   - [ ] Channel
     - [ ] API
