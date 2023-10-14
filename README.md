@@ -15,42 +15,42 @@ go语言开发的[satori](https://satori.js.org/zh-CN/)协议的sdk客户端
   - [x] http
   - [x] websocket
   - [x] webhook
+- [x] API
+- [ ] EVENT
 - [ ] 资源
   - [ ] Channel
-    - [ ] API
+    - [x] API
     - [ ] Event
     - [x] Model
   - [ ] Guild
-    - [ ] API
+    - [x] API
     - [ ] Event
     - [x] Model
   - [ ] GuildMember
-    - [ ] API
+    - [x] API
     - [ ] Event
     - [x] Model
   - [ ] GuildRole
-    - [ ] API
+    - [x] API
     - [ ] Event
     - [x] Model
   - [ ] Login
-    - [ ] API
+    - [x] API
     - [ ] Event
     - [x] Model
   - [ ] Message
-    - [ ] API
+    - [x] API
     - [ ] Event
     - [x] Model
     - [ ] [元素](https://satori.js.org/zh-CN/protocol/elements.html)构建器和解析器
   - [ ] Reaction
-    - [ ] API
+    - [x] API
     - [ ] Event
     - [x] Model
   - [ ] User
-    - [ ] API
+    - [x] API
     - [ ] Event
     - [x] Model
-- [ ] API
-- [ ] EVENT
 ## 示例
 [examples/main.go](./examples/main.go)
 ## 目录
