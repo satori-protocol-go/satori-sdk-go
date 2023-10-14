@@ -27,7 +27,7 @@ func (api *satoriGuildMemberApiImpl) GuildMemberGet(guild_id, user_id string) (*
 	err := api.cli.PostByRequestForResult("/guild.member.get", map[string]string{
 		"guild_id": guild_id,
 		"user_id":  user_id,
-	}, result)
+	}, &result)
 	return result, err
 }
 func (api *satoriGuildMemberApiImpl) GuildMemberList(guild_id, next string) (*GuildMemberList, error) {
@@ -35,7 +35,7 @@ func (api *satoriGuildMemberApiImpl) GuildMemberList(guild_id, next string) (*Gu
 	err := api.cli.PostByRequestForResult("/guild.member.list", map[string]string{
 		"guild_id": guild_id,
 		"next":     next,
-	}, result)
+	}, &result)
 	return result, err
 }
 func (api *satoriGuildMemberApiImpl) GuildMemberKick(guild_id, user_id string, permanent bool) error {

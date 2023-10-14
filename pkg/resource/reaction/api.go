@@ -53,6 +53,6 @@ func (api *satoriReactionApiImpl) ReactionList(channel_id, message_id, emoji, ne
 		"message_id": message_id,
 		"emoji":      emoji,
 		"next":       next,
-	}, result)
+	}, &result)
 	return result, err
 }

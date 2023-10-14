@@ -44,7 +44,7 @@ func (api *satoriGuildRoleApiImpl) GuildRoleList(guild_id, next string) (*GuildR
 	err := api.cli.PostByRequestForResult("/guild.role.list", map[string]string{
 		"guild_id": guild_id,
 		"next":     next,
-	}, result)
+	}, &result)
 	return result, err
 }
 func (api *satoriGuildRoleApiImpl) GuildRoleCreate(guild_id string, role GuildRole) (*GuildRole, error) {
@@ -52,7 +52,7 @@ func (api *satoriGuildRoleApiImpl) GuildRoleCreate(guild_id string, role GuildRo
 	err := api.cli.PostByRequestForResult("/guild.role.create", map[string]interface{}{
 		"guild_id": guild_id,
 		"role":     role,
-	}, result)
+	}, &result)
 	return result, err
 }
 func (api *satoriGuildRoleApiImpl) GuildRoleUpdate(guild_id, role_id string, role GuildRole) error {

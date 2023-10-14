@@ -18,6 +18,6 @@ func NewSatoriLoginApi(cli client.ApiTemplate) (SatoriLoginApi, error) {
 
 func (api *satoriLoginApiImpl) LoginGet() (*Login, error) {
 	var result *Login
-	err := api.cli.PostForResult("/login.get", result)
+	err := api.cli.PostForResult("/login.get", &result)
 	return result, err
 }

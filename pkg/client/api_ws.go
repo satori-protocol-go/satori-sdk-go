@@ -90,7 +90,7 @@ package client
 // 	}
 // 	// 注册回调
 // 	channel := make(chan byte)
-// 	cli.registerCallbackWithChannel(action, reqId, channel, result)
+// 	cli.registerCallbackWithChannel(action, reqId, channel, &result)
 // 	defer func() {
 // 		cli.unregisterCallback(action, reqId)
 // 		close(channel)
@@ -132,7 +132,7 @@ package client
 // 	}
 // 	// 注册回调
 // 	channel := make(chan byte)
-// 	cli.registerCallbackWithChannel(action, reqId, channel, result)
+// 	cli.registerCallbackWithChannel(action, reqId, channel, &result)
 // 	defer func() {
 // 		cli.unregisterCallback(action, reqId)
 // 		close(channel)
@@ -272,7 +272,7 @@ package client
 // 	}
 // 	cli.resultCallbacks[action][reqId] =
 // 		func(data []byte) error {
-// 			json.Unmarshal(data, result)
+// 			json.Unmarshal(data, &result)
 // 			channel <- 1
 // 			return nil
 // 		}

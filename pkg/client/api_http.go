@@ -62,12 +62,12 @@ func NewHttpApiTemplate(conf config.SatoriApiConfig) (ApiTemplate, error) {
 	}
 	return &HttpChannel{
 		cli:      httpCli,
-		endpoint: concatUrl(conf.Endpoint, version),
+		endpoint: fmt.Sprintf("%s/%s", conf.Endpoint, version),
 	}, nil
 }
 
 func concatUrl(basePath, url string) string {
-	return basePath + "/" + url
+	return basePath + url
 }
 
 func (c *HttpChannel) PostByRequestForResult(url string, req, result interface{}) error {

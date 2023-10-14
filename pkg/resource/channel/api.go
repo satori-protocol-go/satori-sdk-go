@@ -27,7 +27,7 @@ func (api *satoriChannelApiImpl) ChannelGet(channel_id string) (*Channel, error)
 	var result *Channel
 	err := api.cli.PostByRequestForResult("/channel.get", map[string]string{
 		"channel_id": channel_id,
-	}, result)
+	}, &result)
 	return result, err
 }
 
@@ -36,7 +36,7 @@ func (api *satoriChannelApiImpl) ChannelList(guild_id string, next string) (*Cha
 	err := api.cli.PostByRequestForResult("/channel.get", map[string]string{
 		"guild_id": guild_id,
 		"next":     next,
-	}, result)
+	}, &result)
 	return result, err
 }
 
@@ -45,7 +45,7 @@ func (api *satoriChannelApiImpl) ChannelCreate(guild_id string, data Channel) (*
 	err := api.cli.PostByRequestForResult("/channel.create", map[string]interface{}{
 		"guild_id": guild_id,
 		"data":     data,
-	}, result)
+	}, &result)
 	return result, err
 }
 
@@ -66,6 +66,6 @@ func (api *satoriChannelApiImpl) UserChannelCreate(user_id string) (*Channel, er
 	var result *Channel
 	err := api.cli.PostByRequestForResult("/user.channel.create", map[string]interface{}{
 		"user_id": user_id,
-	}, result)
+	}, &result)
 	return result, err
 }

@@ -19,12 +19,12 @@ func NewSatoriUserApi(cli client.ApiTemplate) (SatoriUserApi, error) {
 }
 func (api *satoriUserApiImpl) UserGet(user_id string) (*User, error) {
 	var result *User
-	err := api.cli.PostByRequestForResult("/user.get", map[string]string{"user_id": user_id}, result)
+	err := api.cli.PostByRequestForResult("/user.get", map[string]string{"user_id": user_id}, &result)
 	return result, err
 }
 func (api *satoriUserApiImpl) FriendList(next string) (*UserList, error) {
 	var result *UserList
-	err := api.cli.PostByRequestForResult("/user.get", map[string]string{"next": next}, result)
+	err := api.cli.PostByRequestForResult("/user.get", map[string]string{"next": next}, &result)
 	return result, err
 }
 func (api *satoriUserApiImpl) FriendApprove(message_id string, approve bool, comment string) error {

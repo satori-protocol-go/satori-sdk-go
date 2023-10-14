@@ -22,7 +22,7 @@ func (api *satoriGuildApiImpl) GuildGet(guild_id string) (*Guild, error) {
 	var result *Guild
 	err := api.cli.PostByRequestForResult("/guild.get", map[string]string{
 		"guild_id": guild_id,
-	}, result)
+	}, &result)
 	return result, err
 }
 
@@ -30,7 +30,7 @@ func (api *satoriGuildApiImpl) GuildList(next string) (*GuildList, error) {
 	var result *GuildList
 	err := api.cli.PostByRequestForResult("/guild.list", map[string]string{
 		"next": next,
-	}, result)
+	}, &result)
 	return result, err
 }
 
