@@ -13,13 +13,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type HttpReverseEventChannel struct {
+type WebhookEventChannel struct {
 	handler func(message []byte) error
 	svc     *http.Server
 	addr    string
 }
 
-func NewHttpReverseEventChannel(conf *config.SatoriEventConfig) (EventChannel, error) {
+func NewWebhookEventChannel(conf config.SatoriEventConfig) (EventChannel, error) {
 	router := gin.Default()
 	if conf.AccessToken != "" {
 		router.Use(func(c *gin.Context) {
@@ -66,7 +66,7 @@ func NewHttpReverseEventChannel(conf *config.SatoriEventConfig) (EventChannel, e
 		c.Next()
 	})
 
-	result := &HttpReverseEventChannel{
+	result := &WebhookEventChannel{
 		addr: conf.Addr,
 	}
 	router.POST("/event", func(c *gin.Context) {
@@ -89,7 +89,7 @@ func NewHttpReverseEventChannel(conf *config.SatoriEventConfig) (EventChannel, e
 	return result, nil
 }
 
-func (cli *HttpReverseEventChannel) StartListen(ctx context.Context, handler func(message []byte) error) error {
+func (cli *WebhookEventChannel) StartListen(ctx context.Context, handler func(message []byte) error) error {
 	errChan := make(chan error)
 	cli.handler = handler
 	// 异常通过chan 传递

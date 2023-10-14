@@ -13,10 +13,7 @@ type EventChannel interface {
 	// callback func(message []byte) error
 }
 
-func NewEventChannel(conf *config.SatoriEventConfig) (EventChannel, error) {
-	if conf == nil {
-		return nil, errors.New("config is nil")
-	}
+func NewEventChannel(conf config.SatoriEventConfig) (EventChannel, error) {
 	if conf.Type == "" {
 		return nil, errors.New("type is empty")
 	}
@@ -25,16 +22,15 @@ func NewEventChannel(conf *config.SatoriEventConfig) (EventChannel, error) {
 	case "websocket":
 		return NewWebsocketEventChannel(conf)
 	// 反向http
-	case "http-reverse":
-		return NewHttpReverseEventChannel(conf)
+	case "webhook":
+		return NewWebhookEventChannel(conf)
 	// 反向websocket
 	default:
 		return nil, fmt.Errorf(
-			"type %s not support,just support [%s,%s,%s]",
+			"type %s not support,just support [%s,%s]",
 			conf.Type,
 			"websocket",
-			"http-reverse",
-			"websocket-reverse",
+			"webhook",
 		)
 	}
 

@@ -14,7 +14,7 @@ go语言开发的satori协议的sdk客户端
 - [ ] 客户端创建
   - [x] http
   - [x] websocket
-  - [x] webhook
+  - [x] Webhook
 - [ ] 资源
   - [ ] Channel
     - [ ] API

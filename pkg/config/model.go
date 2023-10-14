@@ -18,6 +18,6 @@ type SatoriEventConfig struct {
 }
 
 type SatoriConfig struct {
-	Api   *SatoriApiConfig   `json:"api" yaml:"api"`
-	Event *SatoriEventConfig `json:"event" yaml:"event"`
+	Api   SatoriApiConfig   `json:"api" yaml:"api"`
+	Event SatoriEventConfig `json:"event" yaml:"event"`
 }

@@ -37,7 +37,7 @@ type actionResult struct {
 	Echo    string      `json:"echo"`
 }
 
-func NewWebsocketApiTemplate(conf *config.SatoriApiConfig) (ApiTemplate, error) {
+func NewWebsocketApiTemplate(conf config.SatoriApiConfig) (ApiTemplate, error) {
 	if strings.HasSuffix("/", conf.Endpoint) {
 		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
 	}

@@ -28,7 +28,7 @@ func (ct *accessTokenTransport) RoundTrip(req *http.Request) (*http.Response, er
 	return ct.RoundTripper.RoundTrip(req)
 }
 
-func NewHttpApiTemplate(conf *config.SatoriApiConfig) (ApiTemplate, error) {
+func NewHttpApiTemplate(conf config.SatoriApiConfig) (ApiTemplate, error) {
 	if strings.HasSuffix("/", conf.Endpoint) {
 		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
 	}

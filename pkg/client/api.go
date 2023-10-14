@@ -1,7 +1,7 @@
 package client
 
 import (
-	"errors"
+	"fmt"
 
 	"github.com/dezhishen/satori-sdk-go/pkg/config"
 )
@@ -13,15 +13,17 @@ type ApiTemplate interface {
 	PostByRequestForResult(url string, req, result interface{}) error
 }
 
-func NewApiTemplate(conf *config.SatoriApiConfig) (ApiTemplate, error) {
-	if conf == nil {
-		return nil, errors.New("api config not found")
-	}
+func NewApiTemplate(conf config.SatoriApiConfig) (ApiTemplate, error) {
 	if conf.Type == "http" {
 		return NewHttpApiTemplate(conf)
 	}
 	if conf.Type == "websocket" {
 		return NewWebsocketApiTemplate(conf)
 	}
-	return nil, errors.New("channel not support")
+	return nil, fmt.Errorf(
+		"type %s not support,just support [%s,%s]",
+		conf.Type,
+		"http",
+		"websocket",
+	)
 }
