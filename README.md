@@ -53,6 +53,7 @@ go语言开发的satori协议的sdk客户端
 
 ## 目录
 ```
+- examples # 使用示例
 - pkg # sdk暴露给外部的能力
 - - api # api
 - - client # 客户端,包含api和event的多种方式客户端
