@@ -12,42 +12,57 @@ import (
 )
 
 type HttpChannel struct {
-	cli         http.Client
-	endpoint    string
-	accessToken string
-	// todo add secret support
+	cli      http.Client
+	endpoint string
+}
+
+type normalTransport struct {
+	http.RoundTripper
+	conf config.SatoriApiConfig
+}
+
+func (ct *normalTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	req.Header.Add("X-Platform", ct.conf.Platform)
+	req.Header.Add("X-Self-ID", ct.conf.SelfId)
+	return ct.RoundTripper.RoundTrip(req)
 }
 
 type accessTokenTransport struct {
 	http.RoundTripper
-	accessToken string
+	conf config.SatoriApiConfig
 }
 
 func (ct *accessTokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", ct.accessToken))
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", ct.conf.AccessToken))
+	req.Header.Add("X-Platform", ct.conf.Platform)
+	req.Header.Add("X-Self-ID", ct.conf.SelfId)
 	return ct.RoundTripper.RoundTrip(req)
 }
-
 func NewHttpApiTemplate(conf config.SatoriApiConfig) (ApiTemplate, error) {
 	if strings.HasSuffix("/", conf.Endpoint) {
 		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
 	}
 	var httpCli http.Client
-	if conf.AccessToken != "" {
+	if conf.AccessToken == "" {
 		httpCli = http.Client{
-			Transport: &accessTokenTransport{http.DefaultTransport, conf.AccessToken},
+			Transport: &normalTransport{
+				http.DefaultTransport,
+				conf},
 		}
 	} else {
-		httpCli = http.Client{}
+		httpCli = http.Client{
+			Transport: &accessTokenTransport{
+				http.DefaultTransport,
+				conf},
+		}
 	}
 	version := conf.Version
 	if version == "" {
 		version = "v1"
 	}
 	return &HttpChannel{
-		cli:         httpCli,
-		endpoint:    concatUrl(conf.Endpoint, version),
-		accessToken: conf.AccessToken,
+		cli:      httpCli,
+		endpoint: concatUrl(conf.Endpoint, version),
 	}, nil
 }
 

@@ -6,8 +6,9 @@ type SatoriApiConfig struct {
 	Endpoint    string `json:"endpoint" yaml:"endpoint"` // http://
 	Secret      string `json:"secret" yaml:"secret"`
 	AccessToken string `json:"access_token" yaml:"access-token"`
-	Timeout     int64  `json:"timeout" yaml:"timeout"`         // ms
-	PostFormat  string `json:"post_format" yaml:"post-format"` // string array
+	Timeout     int64  `json:"timeout" yaml:"timeout"` // ms
+	Platform    string `json:"platform" yaml:"platform"`
+	SelfId      string `json:"self_id" yaml:"self_id"`
 }
 
 type SatoriEventConfig struct {
@@ -16,7 +17,6 @@ type SatoriEventConfig struct {
 	Addr        string `json:"addr" yaml:"addr"` // http://
 	Secret      string `json:"secret" yaml:"secret"`
 	AccessToken string `json:"access_token" yaml:"access-token"`
-	PostFormat  string `json:"post_format" yaml:"post-format"` // string array
 }
 
 type SatoriConfig struct {
