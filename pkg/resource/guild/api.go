@@ -1,8 +1,6 @@
 package guild
 
 import (
-	"errors"
-
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 )
 
@@ -21,14 +19,25 @@ func NewSatoriGuildApi(cli client.ApiTemplate) (SatoriGuildApi, error) {
 }
 
 func (api *satoriGuildApiImpl) GuildGet(guild_id string) (*Guild, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *Guild
+	err := api.cli.PostByRequestForResult("/guild.get", map[string]string{
+		"guild_id": guild_id,
+	}, result)
+	return result, err
 }
+
 func (api *satoriGuildApiImpl) GuildList(next string) (*GuildList, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *GuildList
+	err := api.cli.PostByRequestForResult("/guild.list", map[string]string{
+		"next": next,
+	}, result)
+	return result, err
 }
+
 func (api *satoriGuildApiImpl) HandleGuildRequest(message_id string, approve bool, comment string) error {
-	// todo
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/guild.approve", map[string]interface{}{
+		"message_id": message_id,
+		"approve":    approve,
+		"comment":    comment,
+	})
 }

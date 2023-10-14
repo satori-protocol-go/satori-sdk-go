@@ -21,7 +21,7 @@ func NewEventChannel(conf config.SatoriEventConfig) (EventChannel, error) {
 	// websocket
 	case "websocket":
 		return NewWebsocketEventChannel(conf)
-	// 反向http
+	// webhook
 	case "webhook":
 		return NewWebhookEventChannel(conf)
 	// 反向websocket

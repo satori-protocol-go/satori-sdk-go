@@ -1,8 +1,6 @@
 package guildmember
 
 import (
-	"errors"
-
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 )
 
@@ -25,18 +23,32 @@ func NewSatoriGuildMemberApi(cli client.ApiTemplate) (SatoriGuildMemberApi, erro
 }
 
 func (api *satoriGuildMemberApiImpl) GuildMemberGet(guild_id, user_id string) (*GuildMember, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *GuildMember
+	err := api.cli.PostByRequestForResult("/guild.member.get", map[string]string{
+		"guild_id": guild_id,
+		"user_id":  user_id,
+	}, result)
+	return result, err
 }
 func (api *satoriGuildMemberApiImpl) GuildMemberList(guild_id, next string) (*GuildMemberList, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *GuildMemberList
+	err := api.cli.PostByRequestForResult("/guild.member.list", map[string]string{
+		"guild_id": guild_id,
+		"next":     next,
+	}, result)
+	return result, err
 }
 func (api *satoriGuildMemberApiImpl) GuildMemberKick(guild_id, user_id string, permanent bool) error {
-	// todo
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/guild.member.kick", map[string]interface{}{
+		"guild_id":  guild_id,
+		"user_id":   user_id,
+		"permanent": permanent,
+	})
 }
 func (api *satoriGuildMemberApiImpl) GuildMemberApprove(message_id string, approve bool, comment string) error {
-	// todo
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/guild.member.approve", map[string]interface{}{
+		"message_id": message_id,
+		"approve":    approve,
+		"comment":    comment,
+	})
 }

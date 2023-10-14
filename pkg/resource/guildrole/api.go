@@ -1,13 +1,12 @@
 package guildrole
 
 import (
-	"errors"
-
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 )
 
 type SatoriGuildRoleApi interface {
-	GuildRoleSet(guild_id, user_id, role_id string) error
+	GuildMemberRoleSet(guild_id, user_id, role_id string) error
+	GuildMemberRoleUnset(guild_id, user_id, role_id string) error
 	GuildRoleList(guild_id, next string) (*GuildRoleList, error)
 	GuildRoleCreate(guild_id string, role GuildRole) (*GuildRole, error)
 	GuildRoleUpdate(guild_id, role_id string, role GuildRole) error
@@ -25,22 +24,47 @@ func NewSatoriGuildRoleApi(cli client.ApiTemplate) (SatoriGuildRoleApi, error) {
 
 }
 
-func (api *satoriGuildRoleApiImpl) GuildRoleSet(guild_id, user_id, role_id string) error {
-	// todo
-	return errors.New("unSupport")
+func (api *satoriGuildRoleApiImpl) GuildMemberRoleSet(guild_id, user_id, role_id string) error {
+	return api.cli.PostByRequest("/guild.member.role.set", map[string]string{
+		"guild_id": guild_id,
+		"user_id":  user_id,
+		"role_id":  role_id,
+	})
 }
+func (api *satoriGuildRoleApiImpl) GuildMemberRoleUnset(guild_id, user_id, role_id string) error {
+	return api.cli.PostByRequest("/guild.member.role.unset", map[string]string{
+		"guild_id": guild_id,
+		"user_id":  user_id,
+		"role_id":  role_id,
+	})
+}
+
 func (api *satoriGuildRoleApiImpl) GuildRoleList(guild_id, next string) (*GuildRoleList, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *GuildRoleList
+	err := api.cli.PostByRequestForResult("/guild.role.list", map[string]string{
+		"guild_id": guild_id,
+		"next":     next,
+	}, result)
+	return result, err
 }
 func (api *satoriGuildRoleApiImpl) GuildRoleCreate(guild_id string, role GuildRole) (*GuildRole, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *GuildRole
+	err := api.cli.PostByRequestForResult("/guild.role.create", map[string]interface{}{
+		"guild_id": guild_id,
+		"role":     role,
+	}, result)
+	return result, err
 }
 func (api *satoriGuildRoleApiImpl) GuildRoleUpdate(guild_id, role_id string, role GuildRole) error {
-	// todo
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/guild.role.update", map[string]interface{}{
+		"guild_id": guild_id,
+		"role_id":  role_id,
+		"role":     role,
+	})
 }
 func (api *satoriGuildRoleApiImpl) GuildRoleDelete(guild_id, role_id string) error {
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/guild.role.delete", map[string]string{
+		"guild_id": guild_id,
+		"role_id":  role_id,
+	})
 }

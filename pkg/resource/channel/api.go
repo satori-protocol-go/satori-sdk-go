@@ -1,8 +1,6 @@
 package channel
 
 import (
-	"errors"
-
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 )
 
@@ -26,26 +24,48 @@ func NewSatoriChannelApi(cli client.ApiTemplate) (SatoriChannelApi, error) {
 }
 
 func (api *satoriChannelApiImpl) ChannelGet(channel_id string) (*Channel, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *Channel
+	err := api.cli.PostByRequestForResult("/channel.get", map[string]string{
+		"channel_id": channel_id,
+	}, result)
+	return result, err
 }
+
 func (api *satoriChannelApiImpl) ChannelList(guild_id string, next string) (*ChannelList, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *ChannelList
+	err := api.cli.PostByRequestForResult("/channel.get", map[string]string{
+		"guild_id": guild_id,
+		"next":     next,
+	}, result)
+	return result, err
 }
+
 func (api *satoriChannelApiImpl) ChannelCreate(guild_id string, data Channel) (*Channel, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *Channel
+	err := api.cli.PostByRequestForResult("/channel.create", map[string]interface{}{
+		"guild_id": guild_id,
+		"data":     data,
+	}, result)
+	return result, err
 }
+
 func (api *satoriChannelApiImpl) ChannelUpdate(channel_id string, data Channel) error {
-	// todo
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/channel.update", map[string]interface{}{
+		"channel_id": channel_id,
+		"data":       data,
+	})
 }
+
 func (api *satoriChannelApiImpl) ChannelDelete(channel_id string) error {
-	// todo
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/channel.delete", map[string]interface{}{
+		"channel_id": channel_id,
+	})
 }
+
 func (api *satoriChannelApiImpl) UserChannelCreate(user_id string) (*Channel, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *Channel
+	err := api.cli.PostByRequestForResult("/user.channel.create", map[string]interface{}{
+		"user_id": user_id,
+	}, result)
+	return result, err
 }

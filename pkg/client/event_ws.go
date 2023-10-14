@@ -21,15 +21,19 @@ func NewWebsocketEventChannel(conf config.SatoriEventConfig) (EventChannel, erro
 	if strings.HasSuffix("/", conf.Addr) {
 		conf.Addr = strings.TrimSuffix(conf.Addr, "/")
 	}
+	version := conf.Version
+	if version == "" {
+		version = "v1"
+	}
 	result := &WebsocketEventChannel{
-		addr:        conf.Addr,
+		addr:        fmt.Sprintf("%s/%s", conf.Addr, version),
 		accessToken: conf.AccessToken,
 	}
 	return result, nil
 }
 
 func (cli *WebsocketEventChannel) StartListen(ctx context.Context, callback func(message []byte) error) error {
-	url := fmt.Sprintf("%s/event", cli.addr)
+	url := cli.addr
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
 	}
@@ -38,10 +42,20 @@ func (cli *WebsocketEventChannel) StartListen(ctx context.Context, callback func
 	var err error
 	cli.Conn, _, err = websocket.DefaultDialer.DialContext(ctx, url, nil)
 	if err != nil {
-		log.Infof("建立连接出现错误...,错误信息%v", err)
+		log.Errorf("建立连接出现错误...,错误信息%v", err)
 		return err
 	}
 	log.Info("建立连接成功！")
+	log.Info("send IDENTIFY")
+	err = cli.Conn.WriteJSON(map[string]interface{}{
+		"op": 3,
+		"body": map[string]string{
+			"token": cli.accessToken,
+		},
+	})
+	if err != nil {
+		log.Errorf("IDENTIFY发送失败:%v", err)
+	}
 	defer cli.Conn.Close()
 	for {
 		select {

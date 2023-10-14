@@ -17,13 +17,9 @@ func NewApiTemplate(conf config.SatoriApiConfig) (ApiTemplate, error) {
 	if conf.Type == "http" {
 		return NewHttpApiTemplate(conf)
 	}
-	if conf.Type == "websocket" {
-		return NewWebsocketApiTemplate(conf)
-	}
 	return nil, fmt.Errorf(
-		"type %s not support,just support [%s,%s]",
+		"type %s not support,just support [%s]",
 		conf.Type,
 		"http",
-		"websocket",
 	)
 }

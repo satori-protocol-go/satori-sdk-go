@@ -1,8 +1,6 @@
 package login
 
 import (
-	"errors"
-
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 )
 
@@ -15,11 +13,11 @@ type satoriLoginApiImpl struct {
 }
 
 func NewSatoriLoginApi(cli client.ApiTemplate) (SatoriLoginApi, error) {
-	// todo
 	return &satoriLoginApiImpl{cli: cli}, nil
 }
 
 func (api *satoriLoginApiImpl) LoginGet() (*Login, error) {
-	// todo
-	return nil, errors.New("unSupport")
+	var result *Login
+	err := api.cli.PostForResult("/login.get", result)
+	return result, err
 }

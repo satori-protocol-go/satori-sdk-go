@@ -40,9 +40,13 @@ func NewHttpApiTemplate(conf config.SatoriApiConfig) (ApiTemplate, error) {
 	} else {
 		httpCli = http.Client{}
 	}
+	version := conf.Version
+	if version == "" {
+		version = "v1"
+	}
 	return &HttpChannel{
 		cli:         httpCli,
-		endpoint:    conf.Endpoint,
+		endpoint:    concatUrl(conf.Endpoint, version),
 		accessToken: conf.AccessToken,
 	}, nil
 }

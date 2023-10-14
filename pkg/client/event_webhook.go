@@ -1,11 +1,7 @@
 package client
 
 import (
-	"bytes"
 	"context"
-	"crypto/hmac"
-	"crypto/sha1"
-	"encoding/hex"
 	"io"
 	"net/http"
 
@@ -30,46 +26,43 @@ func NewWebhookEventChannel(conf config.SatoriEventConfig) (EventChannel, error)
 			c.Next()
 		})
 	}
-	/*
-		X-Signature的内容中，sha1的值的计算方式为：
-		获取请求体的内容，即 requestBody
-		使用密钥为 secret的HMAC算法加密 requestBody
-		得到的HMAC加密值以Hex格式输出为字符串
-	*/
-	router.Use(func(c *gin.Context) {
-		hSignature := c.GetHeader("X-Signature")
-		if hSignature != "" {
-			if conf.Secret == "" {
-				c.AbortWithStatus(http.StatusUnauthorized)
-				return
-			}
-			// 读取 request body
-			body, err := io.ReadAll(c.Request.Body)
-			if err != nil {
-				c.AbortWithStatus(http.StatusInternalServerError)
-				return
-			}
-			// gin框架中request body只能读取一次，需要复写 request body
-			c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
-			// 使用密钥计算request body的 hmac码
-			mac := hmac.New(sha1.New, []byte(conf.Secret))
-			if _, err := mac.Write(body); err != nil {
-				c.AbortWithStatus(http.StatusInternalServerError)
-				return
-			}
-			// 校验hmac签名
-			if "sha1="+hex.EncodeToString(mac.Sum(nil)) != hSignature {
-				c.AbortWithStatus(http.StatusUnauthorized)
-				return
-			}
-		}
-		c.Next()
-	})
-
+	// router.Use(func(c *gin.Context) {
+	// 	hSignature := c.GetHeader("X-Signature")
+	// 	if hSignature != "" {
+	// 		if conf.Secret == "" {
+	// 			c.AbortWithStatus(http.StatusUnauthorized)
+	// 			return
+	// 		}
+	// 		// 读取 request body
+	// 		body, err := io.ReadAll(c.Request.Body)
+	// 		if err != nil {
+	// 			c.AbortWithStatus(http.StatusInternalServerError)
+	// 			return
+	// 		}
+	// 		// gin框架中request body只能读取一次，需要复写 request body
+	// 		c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
+	// 		// 使用密钥计算request body的 hmac码
+	// 		mac := hmac.New(sha1.New, []byte(conf.Secret))
+	// 		if _, err := mac.Write(body); err != nil {
+	// 			c.AbortWithStatus(http.StatusInternalServerError)
+	// 			return
+	// 		}
+	// 		// 校验hmac签名
+	// 		if "sha1="+hex.EncodeToString(mac.Sum(nil)) != hSignature {
+	// 			c.AbortWithStatus(http.StatusUnauthorized)
+	// 			return
+	// 		}
+	// 	}
+	// 	c.Next()
+	// })
+	version := conf.Version
+	if version == "" {
+		version = "v1"
+	}
 	result := &WebhookEventChannel{
 		addr: conf.Addr,
 	}
-	router.POST("/event", func(c *gin.Context) {
+	router.POST(version+"/events", func(c *gin.Context) {
 		var body []byte
 		var err error
 		if body, err = io.ReadAll(c.Request.Body); err != nil {

@@ -1,8 +1,6 @@
 package reaction
 
 import (
-	"errors"
-
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 	"github.com/dezhishen/satori-sdk-go/pkg/resource/user"
 )
@@ -27,14 +25,34 @@ func NewSatoriReactionApi(cli client.ApiTemplate) (SatoriReactionApi, error) {
 }
 
 func (api *satoriReactionApiImpl) ReactionCreate(channel_id, message_id, emoji string) error {
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/reaction.create", map[string]string{
+		"channel_id": channel_id,
+		"message_id": message_id,
+		"emoji":      emoji,
+	})
 }
 func (api *satoriReactionApiImpl) ReactionDelete(channel_id, message_id, emoji, user_id string) error {
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/reaction.delete", map[string]string{
+		"channel_id": channel_id,
+		"message_id": message_id,
+		"emoji":      emoji,
+		"user_id":    user_id,
+	})
 }
 func (api *satoriReactionApiImpl) ReactionClear(channel_id, message_id, emoji string) error {
-	return errors.New("unSupport")
+	return api.cli.PostByRequest("/reaction.clear", map[string]string{
+		"channel_id": channel_id,
+		"message_id": message_id,
+		"emoji":      emoji,
+	})
 }
 func (api *satoriReactionApiImpl) ReactionList(channel_id, message_id, emoji, next string) (*user.UserList, error) {
-	return nil, errors.New("unSupport")
+	var result *user.UserList
+	err := api.cli.PostByRequestForResult("/reaction.list", map[string]string{
+		"channel_id": channel_id,
+		"message_id": message_id,
+		"emoji":      emoji,
+		"next":       next,
+	}, result)
+	return result, err
 }
