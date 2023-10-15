@@ -10,7 +10,6 @@ import (
 	"github.com/dezhishen/satori-sdk-go/pkg/resource/user"
 )
 
-
 type Event struct {
 	Id        int64                    //事件 ID
 	Type      string                   //事件类型
@@ -27,7 +26,7 @@ type Event struct {
 	User      *user.User               //事件的目标用户
 }
 
-type EventHandlerCallback func(Event Event) error
+type EventHandlerCallback func(e Event) error
 
 type EventHandler struct {
 	EventType    string

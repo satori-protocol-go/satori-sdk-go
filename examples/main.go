@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/dezhishen/satori-sdk-go/pkg/api"
 	"github.com/dezhishen/satori-sdk-go/pkg/config"
+	"github.com/dezhishen/satori-sdk-go/pkg/event"
 )
 
 func main() {
@@ -29,6 +31,19 @@ func main() {
 	} else {
 		fmt.Printf("guildList is :%v,next is :%s", guildList.Data, guildList.Next)
 	}
-	// ...
-	// todo event examples
+
+	satoriEvent, err := event.NewSatorEventByConfig(conf)
+	if err != nil {
+		panic(err)
+	}
+	satoriEvent.ListenMessageCreated(func(e event.Event) error {
+		fmt.Printf("message.created %v", e)
+		return nil
+	})
+	ctx := context.Background()
+	err = satoriEvent.StartWithCtx(ctx)
+	if err != nil {
+		panic(err)
+	}
+
 }

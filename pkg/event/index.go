@@ -1,6 +1,12 @@
 package event
 
 import (
+	"context"
+	"encoding/json"
+	"fmt"
+
+	log "github.com/sirupsen/logrus"
+
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 	"github.com/dezhishen/satori-sdk-go/pkg/config"
 )
@@ -13,6 +19,7 @@ type SatoriEvent interface {
 	SatoriLoginEvent
 	SatoriMessageEvent
 	SatoriUserEvent
+	StartWithCtx(ctx context.Context) error
 }
 
 type SatoriEventImpl struct {
@@ -26,6 +33,31 @@ type SatoriEventImpl struct {
 	SatoriUserEvent
 	template   client.EventTemplate
 	allHandler map[string][]EventHandlerCallback
+}
+
+func (s *SatoriEventImpl) StartWithCtx(ctx context.Context) error {
+	return s.template.StartListen(ctx, func(message []byte) error {
+		var e Event
+		err := json.Unmarshal(message, &e)
+		if err != nil {
+			return fmt.Errorf("handle listen decoder err :%v,raw:%v", err, message)
+		}
+		handler, ok := s.allHandler[e.Type]
+		if ok {
+			for _, callback := range handler {
+				defer func() {
+					if err := recover(); err != nil {
+						log.Errorf("处理回调函数发生错误...%v", err)
+					}
+				}()
+				item := e
+				go func(_e Event) error {
+					return callback(_e)
+				}(item)
+			}
+		}
+		return nil
+	})
 }
 
 // eventHandlers implements SatoriEvent.
@@ -47,7 +79,7 @@ func (impl *SatoriEventImpl) addHandlers(handlers []EventHandler) {
 	}
 }
 
-func NewSatorApiByConfig(conf config.SatoriConfig) (SatoriEvent, error) {
+func NewSatorEventByConfig(conf config.SatoriConfig) (SatoriEvent, error) {
 	template, err := client.NewEventTemplate(conf.Event)
 	if err != nil {
 		return nil, err
