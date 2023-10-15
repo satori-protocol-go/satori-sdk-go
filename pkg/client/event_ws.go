@@ -101,6 +101,8 @@ func (cli *WebsocketEventChannel) StartListen(ctx context.Context, callback func
 						time.Sleep(time.Duration(internal) * time.Second)
 						// }
 					}
+					// 重连后需要重新认证
+					cli.sendIDENTIFY()
 				}
 				if err != nil {
 					log.Errorf("重连失败...,%v", err)
