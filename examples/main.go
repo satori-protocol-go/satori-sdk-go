@@ -21,6 +21,10 @@ func main() {
 			Type: "webhook",
 			Addr: "0.0.0.0:8080",
 		},
+		// Event: config.SatoriEventConfig{
+		// 	Type: "websocket",
+		// 	Addr: "http://127.0.0.1:5140",
+		// },
 	}
 	satoriApi, err := api.NewSatorApiByConfig(conf)
 	if err != nil {
