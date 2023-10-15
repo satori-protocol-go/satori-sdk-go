@@ -10,46 +10,46 @@ go语言开发的[satori](https://satori.js.org/zh-CN/)协议的sdk客户端
 [![](https://img.shields.io/github/last-commit/dezhishen/satori-sdk-go.svg?style=for-the-badge&logo=github)](https://github.com/dezhishen/satori-sdk-go/commits)
 ## todo
 - [ ] 示例
-- [ ] 配置
-- [ ] 客户端创建
-  - [x] http
-  - [x] websocket
-  - [x] webhook
-- [x] API
-- [ ] EVENT
-- [ ] 资源
-  - [ ] Channel
+- [x] 配置
+- [x] 客户端创建
+  - [x] API
+    - [x] http
+  - [x] EVENT
+    - [ ] websocket
+    - [ ] webhook
+- 资源
+  - [x] Channel
     - [x] API
-    - [ ] Event
+    - [x] Event
     - [x] Model
-  - [ ] Guild
+  - [x] Guild
     - [x] API
-    - [ ] Event
+    - [x] Event
     - [x] Model
-  - [ ] GuildMember
+  - [x] GuildMember
     - [x] API
-    - [ ] Event
+    - [x] Event
     - [x] Model
-  - [ ] GuildRole
+  - [x] GuildRole
     - [x] API
-    - [ ] Event
+    - [x] Event
     - [x] Model
-  - [ ] Login
+  - [x] Login
     - [x] API
-    - [ ] Event
+    - [x] Event
     - [x] Model
-  - [ ] Message
+  - [x] Message
     - [x] API
-    - [ ] Event
+    - [x] Event
     - [x] Model
     - [ ] [元素](https://satori.js.org/zh-CN/protocol/elements.html)构建器和解析器
-  - [ ] Reaction
+  - [x] Reaction
     - [x] API
-    - [ ] Event
+    - [x] Event
     - [x] Model
-  - [ ] User
+  - [x] User
     - [x] API
-    - [ ] Event
+    - [x] Event
     - [x] Model
 ## 示例
 [examples/main.go](./examples/main.go)
