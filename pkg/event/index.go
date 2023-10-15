@@ -45,19 +45,20 @@ func (s *SatoriEventImpl) StartWithCtx(ctx context.Context) error {
 		handler, ok := s.allHandler[e.Type]
 		if ok {
 			for _, callback := range handler {
-				defer func() {
-					if err := recover(); err != nil {
-						log.Errorf("处理回调函数发生错误...%v", err)
-					}
-				}()
-				item := e
-				go func(_e Event) error {
-					return callback(_e)
-				}(item)
+				go runCallbakc(e, callback)
 			}
 		}
 		return nil
 	})
+}
+
+func runCallbakc(e Event, callback EventHandlerCallback) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Errorf("处理回调函数发生错误...%v", err)
+		}
+	}()
+	callback(e)
 }
 
 // eventHandlers implements SatoriEvent.
