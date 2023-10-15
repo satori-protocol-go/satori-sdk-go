@@ -15,8 +15,8 @@ go语言开发的[satori](https://satori.js.org/zh-CN/)协议的sdk客户端
   - [x] API
     - [x] http
   - [x] EVENT
-    - [ ] websocket
-    - [ ] webhook
+    - [x] websocket
+    - [x] webhook
 - 资源
   - [x] Channel
     - [x] API
