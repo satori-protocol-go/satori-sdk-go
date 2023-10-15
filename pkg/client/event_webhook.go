@@ -82,6 +82,10 @@ func NewWebhookEventChannel(conf config.SatoriEventConfig) (EventTemplate, error
 	return result, nil
 }
 
+func (*WebhookEventChannel) SetSequence(sequence int64) {
+
+}
+
 func (cli *WebhookEventChannel) StartListen(ctx context.Context, handler func(message []byte) error) error {
 	errChan := make(chan error)
 	cli.handler = handler

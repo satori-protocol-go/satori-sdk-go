@@ -9,6 +9,9 @@ import (
 
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 	"github.com/dezhishen/satori-sdk-go/pkg/config"
+	"github.com/dezhishen/satori-sdk-go/pkg/constant"
+	"github.com/dezhishen/satori-sdk-go/pkg/resource/login"
+	"github.com/tidwall/gjson"
 )
 
 type SatoriEvent interface {
@@ -37,18 +40,35 @@ type SatoriEventImpl struct {
 
 func (s *SatoriEventImpl) StartWithCtx(ctx context.Context) error {
 	return s.template.StartListen(ctx, func(message []byte) error {
-		var e Event
-		err := json.Unmarshal(message, &e)
-		if err != nil {
-			return fmt.Errorf("handle listen decoder err :%v,raw:%v", err, message)
-		}
-		handler, ok := s.allHandler[e.Type]
-		if ok {
-			for _, callback := range handler {
-				go runCallbakc(e, callback)
+		op := gjson.GetBytes(message, "op").Uint()
+		switch constant.SignNum(op) {
+		case constant.SIGN_NUM_EVENT:
+			var e Event
+			body := gjson.GetBytes(message, "body").Raw
+			err := json.Unmarshal([]byte(body), &e)
+			if err != nil {
+				return fmt.Errorf("handle listen decoder err :%v,raw:%v", err, message)
 			}
+			log.Infof("recive EVENT: %s", e.Type)
+			s.template.SetSequence(e.Id)
+			handler, ok := s.allHandler[e.Type]
+			if ok {
+				for _, callback := range handler {
+					go runCallbakc(e, callback)
+				}
+			}
+			return nil
+		case constant.SIGN_NUM_PONG:
+			log.Infof("recive PONG")
+			return nil
+		case constant.SIGN_NUM_READY:
+			var logins []login.Login
+			_ = json.Unmarshal([]byte(gjson.GetBytes(message, "body").Raw), &logins)
+			log.Infof("recive READY:%v", logins)
+			return nil
+		default:
+			return fmt.Errorf("unsupport signNum %d", op)
 		}
-		return nil
 	})
 }
 

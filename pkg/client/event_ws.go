@@ -4,18 +4,21 @@ import (
 	"context"
 	"fmt"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/dezhishen/satori-sdk-go/pkg/config"
+	"github.com/dezhishen/satori-sdk-go/pkg/constant"
 	"github.com/gorilla/websocket"
 	log "github.com/sirupsen/logrus"
 )
 
 type WebsocketEventChannel struct {
+	mu          sync.Mutex
 	Conn        *websocket.Conn
 	addr        string
 	accessToken string
-	sequence    string
+	sequence    int64
 }
 
 func NewWebsocketEventChannel(conf config.SatoriEventConfig) (EventTemplate, error) {
@@ -32,12 +35,16 @@ func NewWebsocketEventChannel(conf config.SatoriEventConfig) (EventTemplate, err
 	}
 	return result, nil
 }
-
+func (cli *WebsocketEventChannel) SetSequence(sequence int64) {
+	cli.sequence = sequence
+}
 func (cli *WebsocketEventChannel) sendIDENTIFY() {
+	defer cli.mu.Unlock()
+	cli.mu.Lock()
 	log.Info("send IDENTIFY")
 	err := cli.Conn.WriteJSON(map[string]interface{}{
-		"op": IDENTIFY,
-		"body": map[string]string{
+		"op": constant.SIGN_NUM_IDENTIFY,
+		"body": map[string]interface{}{
 			"token":    cli.accessToken,
 			"sequence": cli.sequence,
 		},
@@ -55,9 +62,11 @@ func (cli *WebsocketEventChannel) startHeartbeat() {
 }
 
 func (cli *WebsocketEventChannel) sendPING() {
-	log.Info("send IDENTIFY")
+	defer cli.mu.Unlock()
+	cli.mu.Lock()
+	log.Info("send PING")
 	err := cli.Conn.WriteJSON(map[string]interface{}{
-		"op": PING,
+		"op": constant.SIGN_NUM_PING,
 	})
 	if err != nil {
 		log.Errorf("PING发送失败:%v", err)
@@ -65,7 +74,7 @@ func (cli *WebsocketEventChannel) sendPING() {
 }
 
 func (cli *WebsocketEventChannel) StartListen(ctx context.Context, callback func(message []byte) error) error {
-	url := cli.addr
+	url := cli.addr + "/events"
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
 	}

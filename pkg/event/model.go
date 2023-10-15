@@ -11,7 +11,7 @@ import (
 )
 
 type SignInfo struct {
-	Op   uint8       `json:"op"`
+	Op   uint64      `json:"op"`
 	Body interface{} `json:"body,omitempty"`
 }
 

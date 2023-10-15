@@ -14,16 +14,16 @@ func main() {
 		Api: config.SatoriApiConfig{
 			Type:     "http",
 			Platform: "red",
-			SelfId:   "123456",
-			Endpoint: "http://127.0.0.1:5140",
+			SelfId:   "11123456789",
+			Endpoint: "http://127.0.0.1:5140", //https://
 		},
 		Event: config.SatoriEventConfig{
-			Type: "webhook",
-			Addr: "0.0.0.0:8080",
+			Type: "websocket",
+			Addr: "ws://127.0.0.1:5140", // wss://
 		},
 		// Event: config.SatoriEventConfig{
-		// 	Type: "websocket",
-		// 	Addr: "http://127.0.0.1:5140",
+		// 	Type: "webhook",
+		// 	Addr: "0.0.0.0:8080", // 客户端服务的地址，127.0.0.1:8080 限制访问
 		// },
 	}
 	satoriApi, err := api.NewSatorApiByConfig(conf)

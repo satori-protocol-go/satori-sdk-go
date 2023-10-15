@@ -9,6 +9,7 @@ import (
 )
 
 type EventTemplate interface {
+	SetSequence(sequence int64)
 	StartListen(context.Context, func(message []byte) error) error
 	// callback func(message []byte) error
 }
