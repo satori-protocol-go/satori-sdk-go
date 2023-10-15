@@ -12,9 +12,10 @@ import (
 func main() {
 	conf := config.SatoriConfig{
 		Api: config.SatoriApiConfig{
-			Type:        "http",
-			Endpoint:    "http://127.0.0.1:6379",
-			AccessToken: "adawdawd",
+			Type:     "http",
+			Platform: "red",
+			SelfId:   "123456",
+			Endpoint: "http://127.0.0.1:5140",
 		},
 		Event: config.SatoriEventConfig{
 			Type: "webhook",
