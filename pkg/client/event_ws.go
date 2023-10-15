@@ -32,6 +32,36 @@ func NewWebsocketEventChannel(conf config.SatoriEventConfig) (EventTemplate, err
 	return result, nil
 }
 
+func (cli *WebsocketEventChannel) sendIDENTIFY() {
+	log.Info("send IDENTIFY")
+	err := cli.Conn.WriteJSON(map[string]interface{}{
+		"op": IDENTIFY,
+		"body": map[string]string{
+			"token": cli.accessToken,
+		},
+	})
+	if err != nil {
+		log.Errorf("IDENTIFY发送失败:%v", err)
+	}
+}
+
+func (cli *WebsocketEventChannel) startHeartbeat() {
+	for {
+		cli.sendPING()
+		time.Sleep(10 * time.Second)
+	}
+}
+
+func (cli *WebsocketEventChannel) sendPING() {
+	log.Info("send IDENTIFY")
+	err := cli.Conn.WriteJSON(map[string]interface{}{
+		"op": PING,
+	})
+	if err != nil {
+		log.Errorf("PING发送失败:%v", err)
+	}
+}
+
 func (cli *WebsocketEventChannel) StartListen(ctx context.Context, callback func(message []byte) error) error {
 	url := cli.addr
 	if cli.accessToken != "" {
@@ -46,16 +76,9 @@ func (cli *WebsocketEventChannel) StartListen(ctx context.Context, callback func
 		return err
 	}
 	log.Info("建立连接成功！")
-	log.Info("send IDENTIFY")
-	err = cli.Conn.WriteJSON(map[string]interface{}{
-		"op": 3,
-		"body": map[string]string{
-			"token": cli.accessToken,
-		},
-	})
-	if err != nil {
-		log.Errorf("IDENTIFY发送失败:%v", err)
-	}
+	go cli.sendIDENTIFY()
+	// loop to send ping
+	go cli.startHeartbeat()
 	defer cli.Conn.Close()
 	for {
 		select {
