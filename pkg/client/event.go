@@ -8,12 +8,12 @@ import (
 	"github.com/dezhishen/satori-sdk-go/pkg/config"
 )
 
-type EventChannel interface {
+type EventTemplate interface {
 	StartListen(context.Context, func(message []byte) error) error
 	// callback func(message []byte) error
 }
 
-func NewEventChannel(conf config.SatoriEventConfig) (EventChannel, error) {
+func NewEventTemplate(conf config.SatoriEventConfig) (EventTemplate, error) {
 	if conf.Type == "" {
 		return nil, errors.New("type is empty")
 	}

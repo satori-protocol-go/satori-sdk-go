@@ -15,7 +15,7 @@ type WebhookEventChannel struct {
 	addr    string
 }
 
-func NewWebhookEventChannel(conf config.SatoriEventConfig) (EventChannel, error) {
+func NewWebhookEventChannel(conf config.SatoriEventConfig) (EventTemplate, error) {
 	router := gin.Default()
 	if conf.AccessToken != "" {
 		router.Use(func(c *gin.Context) {

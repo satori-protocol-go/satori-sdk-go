@@ -17,7 +17,7 @@ type WebsocketEventChannel struct {
 	accessToken string
 }
 
-func NewWebsocketEventChannel(conf config.SatoriEventConfig) (EventChannel, error) {
+func NewWebsocketEventChannel(conf config.SatoriEventConfig) (EventTemplate, error) {
 	if strings.HasSuffix("/", conf.Addr) {
 		conf.Addr = strings.TrimSuffix(conf.Addr, "/")
 	}
