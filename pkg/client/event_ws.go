@@ -15,6 +15,7 @@ type WebsocketEventChannel struct {
 	Conn        *websocket.Conn
 	addr        string
 	accessToken string
+	sequence    string
 }
 
 func NewWebsocketEventChannel(conf config.SatoriEventConfig) (EventTemplate, error) {
@@ -37,7 +38,8 @@ func (cli *WebsocketEventChannel) sendIDENTIFY() {
 	err := cli.Conn.WriteJSON(map[string]interface{}{
 		"op": IDENTIFY,
 		"body": map[string]string{
-			"token": cli.accessToken,
+			"token":    cli.accessToken,
+			"sequence": cli.sequence,
 		},
 	})
 	if err != nil {
