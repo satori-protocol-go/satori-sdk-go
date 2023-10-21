@@ -4,7 +4,7 @@ import "github.com/dezhishen/satori-sdk-go/pkg/resource/user"
 
 type GuildMember struct {
 	User   *user.User `json:"user"`
-	Name   string     `json:"name"`
+	Nick   string     `json:"nick"`
 	Avatar string     `json:"avatar"`
 	JoinAt int64      `json:"join_at"`
 }
