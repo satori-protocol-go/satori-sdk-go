@@ -1,27 +1,28 @@
-package message
+package api
 
 import (
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
+	"github.com/dezhishen/satori-sdk-go/pkg/resource/message"
 )
 
 type SatoriMessageApi interface {
-	MessageCreate(channel_id, content string) ([]Message, error)
-	MessageGet(channel_id, message_id string) (*Message, error)
+	MessageCreate(channel_id, content string) ([]message.Message, error)
+	MessageGet(channel_id, message_id string) (*message.Message, error)
 	MessageDelete(channel_id, message_id string) error
 	MessageUpdate(channel_id, message_id, content string) error
-	MessageList(channel_id, next string) (*MessageList, error)
+	MessageList(channel_id, next string) (*message.MessageList, error)
 }
 
 type satoriMessageApiImpl struct {
 	cli client.ApiTemplate
 }
 
-func NewSatoriMessageApi(cli client.ApiTemplate) (SatoriMessageApi, error) {
+func newSatoriMessageApi(cli client.ApiTemplate) (SatoriMessageApi, error) {
 	return &satoriMessageApiImpl{cli}, nil
 }
 
-func (api *satoriMessageApiImpl) MessageCreate(channel_id, content string) ([]Message, error) {
-	var result []Message
+func (api *satoriMessageApiImpl) MessageCreate(channel_id, content string) ([]message.Message, error) {
+	var result []message.Message
 	err := api.cli.PostByRequestForResult(
 		"/message.create",
 		map[string]string{
@@ -33,8 +34,8 @@ func (api *satoriMessageApiImpl) MessageCreate(channel_id, content string) ([]Me
 	return result, err
 }
 
-func (api *satoriMessageApiImpl) MessageGet(channel_id, message_id string) (*Message, error) {
-	var result *Message
+func (api *satoriMessageApiImpl) MessageGet(channel_id, message_id string) (*message.Message, error) {
+	var result *message.Message
 	err := api.cli.PostByRequestForResult(
 		"/message.get",
 		map[string]string{
@@ -61,8 +62,8 @@ func (api *satoriMessageApiImpl) MessageUpdate(channel_id, message_id, content s
 	})
 
 }
-func (api *satoriMessageApiImpl) MessageList(channel_id, next string) (*MessageList, error) {
-	var result *MessageList
+func (api *satoriMessageApiImpl) MessageList(channel_id, next string) (*message.MessageList, error) {
+	var result *message.MessageList
 	err := api.cli.PostByRequestForResult(
 		"/message.list",
 		map[string]string{

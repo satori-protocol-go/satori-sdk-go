@@ -1,4 +1,4 @@
-package reaction
+package api
 
 import (
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
@@ -20,7 +20,7 @@ type satoriReactionApiImpl struct {
 	cli client.ApiTemplate
 }
 
-func NewSatoriReactionApi(cli client.ApiTemplate) (SatoriReactionApi, error) {
+func newSatoriReactionApi(cli client.ApiTemplate) (SatoriReactionApi, error) {
 	return &satoriReactionApiImpl{cli}, nil
 }
 
