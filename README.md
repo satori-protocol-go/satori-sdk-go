@@ -11,6 +11,7 @@ go语言开发的[satori](https://satori.js.org/zh-CN/)协议的sdk客户端
 ## todo
 - [x] 示例
 - [x] 配置
+- [ ] 日志标准化
 - [x] 客户端创建
   - [x] API
     - [x] http
