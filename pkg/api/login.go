@@ -1,8 +1,8 @@
 package api
 
 import (
+	"github.com/dezhishen/satori-model-go/pkg/login"
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
-	"github.com/dezhishen/satori-sdk-go/pkg/resource/login"
 )
 
 type SatoriLoginApi interface {

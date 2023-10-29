@@ -1,8 +1,8 @@
 package api
 
 import (
+	"github.com/dezhishen/satori-model-go/pkg/guildrole"
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
-	"github.com/dezhishen/satori-sdk-go/pkg/resource/guildrole"
 )
 
 type SatoriGuildRoleApi interface {

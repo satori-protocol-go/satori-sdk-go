@@ -1,6 +1,6 @@
 package login
 
-import "github.com/dezhishen/satori-sdk-go/pkg/resource/user"
+import "github.com/dezhishen/satori-model-go/pkg/user"
 
 type LoginStatus int32
 

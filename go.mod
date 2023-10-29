@@ -2,7 +2,10 @@ module github.com/dezhishen/satori-sdk-go
 
 go 1.20
 
-require github.com/gin-gonic/gin v1.9.1
+require (
+	github.com/dezhishen/satori-model-go v0.0.1
+	github.com/gin-gonic/gin v1.9.1
+)
 
 require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect

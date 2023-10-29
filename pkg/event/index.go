@@ -7,10 +7,10 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
+	"github.com/dezhishen/satori-model-go/pkg/login"
 	"github.com/dezhishen/satori-sdk-go/pkg/client"
 	"github.com/dezhishen/satori-sdk-go/pkg/config"
 	"github.com/dezhishen/satori-sdk-go/pkg/constant"
-	"github.com/dezhishen/satori-sdk-go/pkg/resource/login"
 	"github.com/tidwall/gjson"
 )
 
