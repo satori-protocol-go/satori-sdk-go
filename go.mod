@@ -3,7 +3,7 @@ module github.com/dezhishen/satori-sdk-go
 go 1.20
 
 require (
-	github.com/dezhishen/satori-model-go v0.0.2
+	github.com/dezhishen/satori-model-go v0.0.3
 	github.com/gin-gonic/gin v1.9.1
 )
 
