@@ -46,8 +46,8 @@ go语言开发的[satori](https://satori.chat/zh-CN)协议的sdk客户端
   - [x] Message
     - [x] API
     - [x] Event
-    - [x] Model
-    - [ ] [元素](https://satori.js.org/zh-CN/protocol/elements.html)构建器和解析器
+    - [x] ~~Model~~ 由[dezhishen/satori-model-go](https://github.com/dezhishen/satori-model-go)提供
+    - [x] ~~[元素]构建器和解析器~~ 由[dezhishen/satori-model-go](https://github.com/dezhishen/satori-model-go)提供
   - [x] Reaction
     - [x] API
     - [x] Event
