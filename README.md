@@ -1,13 +1,13 @@
 # satori-sdk-go
 go语言开发的[satori](https://satori.chat/zh-CN)协议的sdk客户端
 
-[![](https://img.shields.io/github/license/dezhishen/satori-sdk-go.svg?logo=github)](./LICENSE)
-[![](https://img.shields.io/github/stars/dezhishen/satori-sdk-go.svg?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/stargazers)
-[![](https://img.shields.io/github/forks/dezhishen/satori-sdk-go.svg?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/network/members)
-[![](https://img.shields.io/github/contributors/dezhishen/satori-sdk-go.svg?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/graphs/contributors)
+[![](https://img.shields.io/github/license/satori-protocol-go/satori-sdk-go.svg?logo=github)](./LICENSE)
+[![](https://img.shields.io/github/stars/satori-protocol-go/satori-sdk-go.svg?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/stargazers)
+[![](https://img.shields.io/github/forks/satori-protocol-go/satori-sdk-go.svg?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/network/members)
+[![](https://img.shields.io/github/contributors/satori-protocol-go/satori-sdk-go.svg?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/graphs/contributors)
 
-[![](https://img.shields.io/github/commit-activity/m/dezhishen/satori-sdk-go?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/graphs/commit-activity)
-[![](https://img.shields.io/github/last-commit/dezhishen/satori-sdk-go.svg?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/commits)
+[![](https://img.shields.io/github/commit-activity/m/satori-protocol-go/satori-sdk-go?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/graphs/commit-activity)
+[![](https://img.shields.io/github/last-commit/satori-protocol-go/satori-sdk-go.svg?logo=github)](https://github.com/satori-protocol-go/satori-sdk-go/commits)
 [![wakatime](https://wakatime.com/badge/user/a2c981ca-317d-4b34-8ed9-4264fbfdb775/project/018b2817-27cb-454d-b957-5a4686855dcd.svg)](https://wakatime.com/badge/user/a2c981ca-317d-4b34-8ed9-4264fbfdb775/project/018b2817-27cb-454d-b957-5a4686855dcd)
 ## 架构图
 ![](doc/images/架构图.png)
