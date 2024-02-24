@@ -5,8 +5,8 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/dezhishen/satori-sdk-go/pkg/config"
 	"github.com/gin-gonic/gin"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/config"
 )
 
 type WebhookEventChannel struct {

@@ -7,7 +7,7 @@ package client
 // 	"strings"
 // 	"time"
 
-// 	"github.com/dezhishen/satori-sdk-go/pkg/config"
+// 	"github.com/satori-protocol-go/satori-sdk-go/pkg/config"
 // 	"github.com/gorilla/websocket"
 // 	log "github.com/sirupsen/logrus"
 // )

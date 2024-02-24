@@ -3,7 +3,7 @@ package client
 import (
 	"fmt"
 
-	"github.com/dezhishen/satori-sdk-go/pkg/config"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/config"
 )
 
 type ApiTemplate interface {

@@ -1,13 +1,13 @@
 package event
 
 import (
-	"github.com/dezhishen/satori-model-go/pkg/channel"
-	"github.com/dezhishen/satori-model-go/pkg/guild"
-	"github.com/dezhishen/satori-model-go/pkg/guildmember"
-	"github.com/dezhishen/satori-model-go/pkg/guildrole"
-	"github.com/dezhishen/satori-model-go/pkg/login"
-	"github.com/dezhishen/satori-model-go/pkg/message"
-	"github.com/dezhishen/satori-model-go/pkg/user"
+	"github.com/satori-protocol-go/satori-model-go/pkg/channel"
+	"github.com/satori-protocol-go/satori-model-go/pkg/guild"
+	"github.com/satori-protocol-go/satori-model-go/pkg/guildmember"
+	"github.com/satori-protocol-go/satori-model-go/pkg/guildrole"
+	"github.com/satori-protocol-go/satori-model-go/pkg/login"
+	"github.com/satori-protocol-go/satori-model-go/pkg/message"
+	"github.com/satori-protocol-go/satori-model-go/pkg/user"
 )
 
 type SignInfo struct {

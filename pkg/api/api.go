@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/dezhishen/satori-sdk-go/pkg/client"
-	"github.com/dezhishen/satori-sdk-go/pkg/config"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/client"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/config"
 )
 
 type SatoriApi interface {

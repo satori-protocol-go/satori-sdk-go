@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/dezhishen/satori-sdk-go/pkg/config"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/config"
 )
 
 type HttpChannel struct {

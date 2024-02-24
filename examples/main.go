@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/dezhishen/satori-sdk-go/pkg/api"
-	"github.com/dezhishen/satori-sdk-go/pkg/config"
-	"github.com/dezhishen/satori-sdk-go/pkg/event"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/api"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/config"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/event"
 )
 
 func main() {

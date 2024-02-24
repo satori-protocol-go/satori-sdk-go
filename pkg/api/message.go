@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/dezhishen/satori-model-go/pkg/message"
-	"github.com/dezhishen/satori-sdk-go/pkg/client"
+	"github.com/satori-protocol-go/satori-model-go/pkg/message"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/client"
 )
 
 type SatoriMessageApi interface {

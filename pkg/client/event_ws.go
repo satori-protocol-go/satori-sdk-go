@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/dezhishen/satori-sdk-go/pkg/config"
-	"github.com/dezhishen/satori-sdk-go/pkg/constant"
 	"github.com/gorilla/websocket"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/config"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/constant"
 	log "github.com/sirupsen/logrus"
 )
 

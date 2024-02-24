@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/dezhishen/satori-model-go/pkg/user"
-	"github.com/dezhishen/satori-sdk-go/pkg/client"
+	"github.com/satori-protocol-go/satori-model-go/pkg/user"
+	"github.com/satori-protocol-go/satori-sdk-go/pkg/client"
 )
 
 type SatoriReactionApi interface {
