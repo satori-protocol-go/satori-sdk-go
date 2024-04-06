@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/gin-gonic/gin v1.9.1
-	github.com/satori-protocol-go/satori-model-go v0.0.6
+	github.com/satori-protocol-go/satori-model-go v0.0.7
 )
 
 require (

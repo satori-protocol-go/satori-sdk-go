@@ -190,6 +190,8 @@ github.com/sagikazarmark/slog-shim v0.1.0 h1:diDBnUNK9N/354PgrxMywXnAwEr1QZcOr6g
 github.com/sagikazarmark/slog-shim v0.1.0/go.mod h1:SrcSrq8aKtyuqEI1uvTDTK1arOWRIczQRv+GVI1AkeQ=
 github.com/satori-protocol-go/satori-model-go v0.0.6 h1:Cxe6emS+gxTIU9NxmDUYqqDWcPX+me+zGqxqJn9G8iU=
 github.com/satori-protocol-go/satori-model-go v0.0.6/go.mod h1:R+7VkMNjo74rCmvHijpmQywU/Ahc9DcC/0YUCaYYLuE=
+github.com/satori-protocol-go/satori-model-go v0.0.7 h1:WxXZQ1qMga8umcBEBMzkFemKYDqgIzJ+Jwfe9OiD2tQ=
+github.com/satori-protocol-go/satori-model-go v0.0.7/go.mod h1:R+7VkMNjo74rCmvHijpmQywU/Ahc9DcC/0YUCaYYLuE=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
 github.com/sourcegraph/conc v0.3.0 h1:OQTbbt6P72L20UqAkXXuLOj79LfEanQ+YQFNpLA9ySo=
